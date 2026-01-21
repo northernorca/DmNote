@@ -56,6 +56,20 @@ fn main() {
         return;
     }
 
+    #[cfg(target_os = "linux")]
+    unsafe {
+        // WebKitGTK의 DMA-BUF renderer가 NVIDIA GPU의 explicit sync와 맞물리지 않아, 크래시가
+        // 발생하거나 창 redraw가 올바르게 작동하지 않습니다. 다만, DMA-BUF renderer가 꺼져있을
+        // 경우 redraw 이슈가 발생하므로 이 부분을 일부터 킵니다.
+        // 
+        // # Safety
+        // Rust 2024 이후로는 std::env::set_var가 unsafe 함수인데, 이는 Unix 계열 OS의 멀티스레딩
+        // 환경에서 getenv와 setenv가 사용되면 레이스가 발생할 수 있기 때문입니다.
+        // 현재 이 위치는 "스레드"는 하나뿐이기 때문에 안전합니다.
+        std::env::set_var("__NV_DISABLE_EXPLICIT_SYNC", "1");
+        std::env::remove_var("WEBKIT_DISABLE_DMABUF_RENDERER");
+    }
+
     if let Err(err) = setup_logging() {
         eprintln!("Failed to initialize logging: {err}");
     }
