@@ -1,5 +1,5 @@
 pub mod daemon;
-#[cfg(target_os = "windows")]
+#[cfg(any(target_os = "windows", target_os = "linux"))]
 pub mod labels;
 pub mod manager;
 
