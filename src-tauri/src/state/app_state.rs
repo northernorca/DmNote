@@ -669,8 +669,14 @@ impl AppState {
             }
         }
 
-        window.set_size(LogicalSize::new(width, height))?;
         window.set_position(LogicalPosition::new(new_x, new_y))?;
+        window.set_size(LogicalSize::new(width, height))?;
+
+        #[cfg(target_os = "linux")]
+        {
+            let _ = window.set_min_size(Some(LogicalSize::new(width, height)));
+            let _ = window.set_max_size(Some(LogicalSize::new(width, height)));
+        }
 
         let bounds = OverlayBounds {
             x: new_x,
@@ -1219,7 +1225,7 @@ impl AppState {
             )
             .title("DM Note - Overlay")
             .decorations(false)
-            .resizable(false)
+            .resizable(cfg!(target_os = "linux"))
             .maximizable(false)
             .zoom_hotkeys_enabled(false);
 
