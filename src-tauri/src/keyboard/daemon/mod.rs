@@ -14,6 +14,9 @@ mod windows;
 #[cfg(target_os = "macos")]
 mod macos;
 
+#[cfg(target_os = "linux")]
+mod linux;
+
 fn load_hotkeys_from_env() -> ShortcutsState {
     std::env::var("DMNOTE_HOTKEYS_V1")
         .ok()
@@ -46,7 +49,12 @@ pub fn run() -> Result<()> {
         return macos::run_macos();
     }
 
-    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    #[cfg(target_os = "linux")]
+    {
+        return linux::run_linux();
+    }
+
+    #[cfg(not(any(target_os = "windows", target_os = "macos", target_os = "linux")))]
     {
         Err(anyhow!(
             "Raw input backend is only available on Windows and macOS"
