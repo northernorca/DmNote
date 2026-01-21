@@ -411,8 +411,14 @@ impl AppState {
             }
         }
 
-        window.set_size(LogicalSize::new(width, height))?;
         window.set_position(LogicalPosition::new(new_x, new_y))?;
+        window.set_size(LogicalSize::new(width, height))?;
+
+        #[cfg(target_os = "linux")]
+        {
+            let _ = window.set_min_size(Some(LogicalSize::new(width, height)));
+            let _ = window.set_max_size(Some(LogicalSize::new(width, height)));
+        }
 
         let bounds = OverlayBounds {
             x: new_x,
@@ -470,6 +476,24 @@ impl AppState {
         };
         #[cfg(not(target_os = "windows"))]
         let _pipe_receiver: Option<std::sync::mpsc::Receiver<Option<std::fs::File>>> = None;
+
+        #[cfg(target_os = "linux")]
+        let mut child = {
+            use nix::unistd::{getuid, getgid, Group};
+            let uid = getuid().as_raw();
+            let gid = getgid().as_raw();
+            Command::new("pkexec")
+                .arg(&current_exe)
+                .arg("--keyboard-daemon")
+                .arg(format!("--drop-uid={uid}"))
+                .arg(format!("--drop-gid={gid}"))
+                .stdin(Stdio::null())
+                .stdout(Stdio::piped())
+                .stderr(Stdio::piped())
+                .spawn()
+                .context("failed to spawn keyboard daemon process (with pkexec)")?
+        };
+        #[cfg(not(target_os = "linux"))]
         let mut child = Command::new(current_exe)
             .arg("--keyboard-daemon")
             .env("DMNOTE_HOTKEYS_V1", shortcuts_json)
@@ -823,7 +847,7 @@ impl AppState {
             )
             .title("DM Note - Overlay")
             .decorations(false)
-            .resizable(false)
+            .resizable(cfg!(target_os = "linux"))
             .maximizable(false)
             .zoom_hotkeys_enabled(false);
 

@@ -5,7 +5,7 @@
 <div align="center">
   <img src="src-tauri/icons/icon.ico" alt="dmnote Logo" width="120" height="120">
 
-  <h1>DM Note</h1>
+  <h1>DM Note for Linux</h1>
   
   <p>
     <strong>다양한 커스터마이징을 지원하는 키뷰어 프로그램</strong>
@@ -14,20 +14,20 @@
     <strong>사용자 정의 키 매핑과 스타일링, 손쉽게 전환 가능한 프리셋, 모던하고 직관적인 인터페이스를 제공합니다.</strong>
   </p>
   
-  [![GitHub release](https://img.shields.io/github/release/lee-sihun/DmNote.svg?logo=github)](https://github.com/lee-sihun/DmNote/releases)
-  [![GitHub downloads](https://img.shields.io/github/downloads/lee-sihun/DmNote/total.svg?logo=github)](https://github.com/lee-sihun/DmNote/releases/download/1.5.2/DM.NOTE.v.1.5.2.zip)
-  [![GitHub license](https://img.shields.io/github/license/lee-sihun/DmNote.svg?logo=github)](https://github.com/lee-sihun/DmNote/blob/master/LICENSE)
+  [![GitHub release](https://img.shields.io/github/release/northernorca/DmNote.svg?logo=github)](https://github.com/northernorca/DmNote/releases)
+  [![GitHub downloads](https://img.shields.io/github/downloads/northernorca/DmNote/total.svg?logo=github)](https://github.com/northernorca/DmNote/releases/download/1.5.0/DM.NOTE.v.1.5.0.zip)
+  [![GitHub license](https://img.shields.io/github/license/northernorca/DmNote.svg?logo=github)](https://github.com/northernorca/DmNote/blob/master/LICENSE)
 </div>
 
 https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 
 ## 🌟 개요
 
-**DM Note**는 DJMAX RESPECT V에서 사용하기 위해 만들어진 키뷰어 프로그램입니다. Tauri와 React로 구축 되었으며 간편한 설정으로 스트리밍이나 플레이 영상 제작 시 키 입력을 시각적으로 보여줄 수 있습니다. 현재는 공식적으로 Windows 10/11, macOS 환경만 지원하고 있습니다. 만약 리눅스 환경이라면 [커뮤니티 포크 버전](https://github.com/northernorca/DmNote)을 사용해보는걸 추천합니다.
+**DM Note**는 DJMAX RESPECT V에서 사용하기 위해 만들어진 키뷰어 프로그램입니다. Tauri와 React로 구축 되었으며 간편한 설정으로 스트리밍이나 플레이 영상 제작 시 키 입력을 시각적으로 보여줄 수 있습니다. 공식적으로는 Windows 10/11, macOS 환경만 지원하고 있으나, 본 레포지토리에서 리눅스 환경에 대한 구현을 추가하였습니다.
 
 **이 프로그램은 스트리밍이나 플레이 영상 제작 등에 자유롭게 사용 가능합니다.** 
 
-[DM NOTE v1.5.2 다운로드](https://github.com/lee-sihun/DmNote/releases/download/1.5.2/DM.NOTE.v.1.5.2.zip)
+[DM NOTE for Linux 다운로드](https://github.com/northernorca/DmNote/releases)
 
 ## ✨ 주요 기능
 
@@ -82,7 +82,7 @@ https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 - **프론트엔드**: React 19 + Typescript + Vite 7
 - **백엔드**: Tauri
 - **스타일링**: Tailwind CSS 3
-- **입력 감지**: Raw Input API (Windows), 전역 입력 이벤트 (macOS)
+- **입력 감지**: Raw Input API (Windows), 전역 입력 이벤트 (macOS), evdev (Linux)
 - **패키지 매니저**: npm
 
 ### 폴더 구조
@@ -107,13 +107,23 @@ DmNote/
 
 ### 기본 설치 및 실행
 
-터미널에서 다음 명령어를 순서대로 입력하세요.
+`apt`, `dnf`를 사용할 수 있는 배포판이라면 [릴리즈 페이지](https://github.com/northernorca/DmNote/releases)에서 패키지를 다운받아 설치하시면 됩니다. (우분투, 페도라 등)
+
+Arch linux 기반 배포판을 위해선 [AUR 패키지](https://aur.archlinux.org/packages/dm-note-bin)를 배포하고 있습니다.
+
+그 외 배포판에서 프로그램을 직접 빌드하고 실행하려면, 터미널에서 다음 명령어를 순서대로 입력하세요.
 
 ```bash
-git clone https://github.com/lee-sihun/DmNote.git
+git clone https://github.com/northernorca/DmNote.git
 cd DmNote
 npm install
 npm run tauri:dev
+```
+
+Nvidia 그래픽 카드를 사용중이라면 아래와 같이 환경변수를 추가하여 explicit sync를 비활성화해주셔야 합니다.
+
+```
+__NV_DISABLE_EXPLICIT_SYNC=1 npm run tauri:dev
 ```
 
 ## 🖼️ 스크린샷

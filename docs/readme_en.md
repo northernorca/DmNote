@@ -14,20 +14,20 @@
     <strong>Offers user-defined key mapping and styling, easily switchable presets, and a modern, intuitive interface.</strong>
   </p>
   
-  [![GitHub release](https://img.shields.io/github/release/lee-sihun/DmNote.svg?logo=github)](https://github.com/lee-sihun/DmNote/releases)
-  [![GitHub downloads](https://img.shields.io/github/downloads/lee-sihun/DmNote/total.svg?logo=github)](https://github.com/lee-sihun/DmNote/releases/download/1.5.2/DM.NOTE.v.1.5.2.zip)
-  [![GitHub license](https://img.shields.io/github/license/lee-sihun/DmNote.svg?logo=github)](https://github.com/lee-sihun/DmNote/blob/master/LICENSE)
+  [![GitHub release](https://img.shields.io/github/release/northernorca/DmNote.svg?logo=github)](https://github.com/northernorca/DmNote/releases)
+  [![GitHub downloads](https://img.shields.io/github/downloads/northernorca/DmNote/total.svg?logo=github)](https://github.com/northernorca/DmNote/releases/tag/v1.5.0%2Blinux.1)
+  [![GitHub license](https://img.shields.io/github/license/northernorca/DmNote.svg?logo=github)](https://github.com/northernorca/DmNote/blob/master/LICENSE)
 </div>
 
 https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 
 ## 🌟 Overview
 
-**DM Note** is a key viewer program created for use with DJMAX RESPECT V. Built with Tauri and React, it allows you to visually display key inputs during streaming or gameplay video creation with simple setup. Currently, it officially supports Windows 10/11 and macOS environments only. If you are on Linux, we recommend trying the [community fork version](https://github.com/northernorca/DmNote).
+**DM Note** is a key viewer program created for use with DJMAX RESPECT V. Built with Tauri and React, it allows you to visually display key inputs during streaming or gameplay video creation with simple setup. The official version only supports Windows 10/11 and macOS, and this repository attempts to add a Linux implementation.
 
 **This program is free to use for streaming or gameplay video production.**
 
-[Download DM NOTE v1.5.2](https://github.com/lee-sihun/DmNote/releases/download/1.5.2/DM.NOTE.v.1.5.2.zip)
+[Download DM NOTE for Linux](https://github.com/northernorca/DmNote/releases)
 
 ## ✨ Features
 
@@ -82,7 +82,7 @@ https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 - **Frontend**: React 19 + Typescript + Vite 7
 - **Backend**: Tauri
 - **Styling**: Tailwind CSS 3
-- **Input Detection**: Raw Input API (Windows), Global input events (macOS)
+- **Input Detection**: Raw Input API (Windows), Global input events (macOS), evdev (Linux)
 - **Package Manager**: npm
 
 ### Folder Structure
@@ -107,13 +107,23 @@ DmNote/
 
 ### Basic Installation & Run
 
-Enter the following commands in your terminal in order:
+If you're using a distro using `apt` or `dnf` (i.e. Ubuntu, Fedora, etc.), then download and install the package from [Releases](https://github.com/northernorca/DmNote/releases).
+
+For Arch-base distros, this program is distributed on the [AUR](https://aur.archlinux.org/packages/dm-note-bin).
+
+To build and run on other distros, run the following commands in your terminal in order:
 
 ```bash
 git clone https://github.com/lee-sihun/DmNote.git
 cd DmNote
 npm install
 npm run tauri:dev
+```
+
+If you're using NVIDIA GPU, explicit sync should be disabled for the program to not crash on launching:
+
+```bash
+__NV_DISABLE_EXPLICIT_SYNC=1 npm run tauri:dev
 ```
 
 ## 🖼️ Screenshots
