@@ -25,7 +25,42 @@ https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 
 **DM Note**는 DJMAX RESPECT V에서 사용하기 위해 만들어진 키뷰어 프로그램입니다. Tauri와 React로 구축 되었으며 간편한 설정으로 스트리밍이나 플레이 영상 제작 시 키 입력을 시각적으로 보여줄 수 있습니다. 현재는 공식적으로 Windows 10/11, macOS 환경만 지원하고 있습니다. 만약 리눅스 환경이라면 [커뮤니티 포크 버전](https://github.com/northernorca/DmNote)을 사용해보는걸 추천합니다.
 
-[DM NOTE v1.5.0 다운로드](https://github.com/lee-sihun/DmNote/releases/download/1.5.0/DM.NOTE.v.1.5.0.zip)
+본 레포지토리는 DM Note를 **Linux**에도 사용할 수 있도록 구현하는 프로젝트입니다.
+
+[DM NOTE for Linux 다운로드](https://github.com/northernorca/DmNote/releases)
+
+## 설치 및 실행
+
+### Ubuntu, Debian 등 APT 기반 배포판
+
+Release 탭에서 `.deb` 파일을 다운받아 실행합니다.
+
+### Fedora, RHEL 등 RPM 기반 배포판
+
+Release 탭에서 `.rpm` 파일을 다운받아 실행합니다.
+
+### Arch, Cachy, Endeavour 등 pacman 기반 배포판
+
+DM NOTE for Linux는 [AUR에서 배포중](https://aur.archlinux.org/packages/dm-note-bin)입니다. AUR의 사용법은 ArchWiki의 [Arch User Repository](https://wiki.archlinux.org/title/Arch_User_Repository) 페이지를 참조하세요.
+
+### 그 외
+
+추후에 Appimage로도 번들링하여 distro-agnostic하게 실행 가능하게 할 계획입니다.
+
+### 직접 빌드 및 실행
+
+```bash
+git clone https://github.com/northernorca/DmNote.git --depth 1
+cd DmNote
+npm install
+npm run tauri:dev
+```
+
+Nvidia 그래픽 카드를 사용중이라면 마지막 줄을 아래와 같이 바꾸어 explicit sync를 해제해야 합니다.
+
+```bash
+__NV_DISABLE_EXPLICIT_SYNC=1 npm run tauri:dev
+```
 
 ## ✨ 주요 기능
 
@@ -98,7 +133,7 @@ DmNote/
 └─ vite.config.ts                # Vite 설정
 ```
 
-### 기본 설치 및 실행
+### 빌드 및 실행
 
 터미널에서 다음 명령어를 순서대로 입력하세요.
 
@@ -108,6 +143,22 @@ cd DmNote
 npm install
 npm run tauri:dev
 ```
+
+Linux의 Nvidia, Wayland 환경에서는 마지막 라인을 다음으로 고쳐서 explicit sync를 비활성화 시켜주세요.
+
+```bash
+__NV_DISABLE_EXPLICIT_SYNC=1 npm run tauri:dev
+```
+
+### Linux 번들링
+
+`src-tauri/tauri.linux.conf.json`의 버전을 알맞게 수정하고 아래 스크립트를 실행합니다.
+
+```bash
+./scripts/bundle/bundle.sh
+```
+
+그러면 `scripts/bundle/{version}/` 디렉토리 하에 번들링된 패키지가 놓입니다.
 
 ## 🖼️ 스크린샷
 

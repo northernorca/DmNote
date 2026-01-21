@@ -6,7 +6,7 @@ mod cursor;
 mod defaults;
 mod keyboard;
 mod keyboard_daemon;
-#[cfg(target_os = "windows")]
+#[cfg(any(target_os = "windows", target_os = "linux"))]
 mod keyboard_labels;
 mod ipc;
 mod models;

@@ -1,0 +1,15 @@
+# Maintainer: northernorca <sk-orcawhale@proton.me>
+pkgname=dm-note-bin
+pkgver=<version>
+pkgrel=1
+pkgdesc="<description>"
+arch=('x86_64')
+url="https://github.com/northernorca/DmNote"
+license=('GPLv3')
+depends=('cairo' 'desktop-file-utils' 'gdk-pixbuf2' 'glib2' 'gst-plugins-good' 'gtk3' 'hicolor-icon-theme' 'libsoup' 'pango' 'webkit2gtk-4.1')
+options=('!strip' '!debug')
+install=${pkgname}.install
+source_x86_64=("../../${pkgver}/DM NOTE_${pkgver}_amd64.deb")
+package() {
+  tar -xvf data.tar.gz -C "${pkgdir}"
+}
