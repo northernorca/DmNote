@@ -7,7 +7,6 @@ src-tauri/target
 .DS_Store
 .claude/settings.local.json
 
-# WebView2 FixedVersionRuntime (downloaded locally; keep placeholder)
 src-tauri/webview2-fixed-runtime/*
 !src-tauri/webview2-fixed-runtime/placeholder.txt
 
@@ -30,3 +29,9 @@ BundleArtifacts/
 *.msixbundle
 *.pfx
 Package.StoreAssociation.xml
+
+scripts/bundle/*
+!scripts/bundle/templates/
+!scripts/bundle/templates/**
+!scripts/bundle/bundle.sh
+>>>>>>> ce9b49e (chore: add linux packaging and versioning)

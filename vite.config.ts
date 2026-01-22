@@ -18,7 +18,7 @@ export default defineConfig(() => {
     root: windowsRoot,
     base: "./",
     define: {
-      __APP_VERSION__: JSON.stringify(pkg.version),
+      __APP_VERSION__: JSON.stringify(process.env.DMNOTE_VERSION ?? pkg.version),
     },
     plugins: [
       react({
