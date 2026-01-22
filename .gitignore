@@ -6,3 +6,8 @@ AGENTS.md
 copilot-instructions.md
 src-tauri/target
 .DS_Store
+
+scripts/bundle/*
+!scripts/bundle/templates/
+!scripts/bundle/templates/**
+!scripts/bundle/bundle.sh
