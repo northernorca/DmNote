@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const GITHUB_REPO = "lee-sihun/DmNote";
+const GITHUB_REPO = "northernorca/DmNote";
 const STORAGE_KEY = "dmnote:skipped-version";
 const CACHE_KEY = "dmnote:update-check-cache";
 const CACHE_MS = 5 * 60 * 1000; // 5분 캐시
@@ -37,18 +37,29 @@ interface UpdateState {
   skipVersion: () => void;
 }
 
-function compareVersions(current: string, latest: string): number {
-  const normalize = (v: string) => v.replace(/^v/, "");
-  const currentParts = normalize(current).split(".").map(Number);
-  const latestParts = normalize(latest).split(".").map(Number);
+function parseDmNoteVersion(input: string) {
+  const v = input.replace(/^v/i, "").trim();
+  const [core, meta = ""] = v.split("+", 2); // core: 1.4.1  meta: linux.1
+  const [maj, min, pat] = core.split(".").map((x) => parseInt(x, 10) || 0);
+  let linuxBuild = 0; // +linux.1 / +linux1 / +linux_1 / +linux-1 다 수용
+  const m = meta.match(/linux[._-]?(\d+)/i);
+  if (m) linuxBuild = parseInt(m[1], 10) || 0;
+;
+  return { maj, min, pat, linuxBuild };
+}
 
-  for (let i = 0; i < Math.max(currentParts.length, latestParts.length); i++) {
-    const a = currentParts[i] || 0;
-    const b = latestParts[i] || 0;
-    if (a < b) return -1;
-    if (a > b) return 1;
-  }
-  return 0;
+function compareVersions(current: string, latest: string): number {
+  const curr = parseDmNoteVersion(current);
+  const late = parseDmNoteVersion(latest);
+
+  if (curr.maj !== late.maj) return curr.maj < late.maj ? -1 : 1
+  if (curr.min !== late.min) return curr.min < late.min ? -1 : 1
+  if (curr.pat !== late.pat) return curr.pat < late.pat ? -1 : 1
+
+  // 같은 1.4.1이라도 linux 빌드 넘버로 업데이트 판단
+  if (curr.linuxBuild !== late.linuxBuild) return curr.linuxBuild < late.linuxBuild ? -1 : 1
+
+  return 0
 }
 
 function getSkippedVersion(): string | null {
