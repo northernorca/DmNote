@@ -39,7 +39,7 @@ Release 탭에서 `.rpm` 파일을 다운받아 실행합니다.
 
 ### Arch, Cachy, Endeavour 등 pacman 기반 배포판
 
-Release 탭에서 `.pkg.tar.zst` 파일을 다운받고, 커맨드 라인에서 다음과 같이 설치합니다.
+DM NOTE for Linux는 [AUR에서 배포중](https://aur.archlinux.org/packages/dm-note-bin)입니다. AUR의 사용법은 ArchWiki의 [Arch User Repository](https://wiki.archlinux.org/title/Arch_User_Repository) 페이지를 참조하세요.
 
 ```bash
 sudo pacman -U <filename>.pkg.tar.zst
