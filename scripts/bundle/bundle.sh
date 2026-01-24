@@ -27,12 +27,12 @@ mkdir -p -- "$OUTPUT_DIR"
 # Build and bundle for rpm and deb
 echo "=== Start bundling for deb and rpm packages ==="
 npm run tauri:build
-DEB_SRC="$ROOT_DIR/src-tauri/target/release/bundle/deb/DM_NOTE_${VERSION}_amd64.deb"
+DEB_SRC="$ROOT_DIR/src-tauri/target/release/bundle/deb/DM NOTE_${VERSION}_amd64.deb"
 if [[ ! -f "$DEB_SRC" ]]; then
 	echo "deb package not found: ${DEB_SRC}" >&2
   exit 1
 fi
-RPM_SRC="$ROOT_DIR/src-tauri/target/release/bundle/rpm/DM_NOTE-${VERSION}-1.x86_64.rpm"
+RPM_SRC="$ROOT_DIR/src-tauri/target/release/bundle/rpm/DM NOTE-${VERSION}-1.x86_64.rpm"
 if [[ ! -f "$RPM_SRC" ]]; then
 	echo "rpm package not found as ${RPM_SRC}" >&2
   exit 1
