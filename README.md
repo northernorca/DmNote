@@ -25,7 +25,7 @@ https://github.com/user-attachments/assets/d2d638b4-5867-4a3e-8710-0fa843eaf236
 
 본 레포지토리는 DM Note를 **Linux**에도 사용할 수 있도록 구현하는 프로젝트입니다.
 
-[DM NOTE v1.4.1_linux_1 다운로드](https://github.com/northernorca/DmNote/releases/tag/v1.4.1_linux_1)
+[DM NOTE for Linux 다운로드](https://github.com/northernorca/DmNote/releases)
 
 ## 설치 및 실행
 
