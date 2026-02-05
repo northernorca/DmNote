@@ -2,6 +2,8 @@
 
 [한국어](../README.md) | [English](docs/readme_en.md) | **中文**
 
+- The update on README for this Linux version is not applied to this Chinese README, as the maintainer know zero Chinese. I'd appreciate contributions for the translations, but otherwise, sorry!
+
 <div align="center">
   <img src="../src-tauri/icons/icon.ico" alt="dmnote Logo" width="120" height="120">
 
@@ -14,9 +16,9 @@
     <strong>提供用户自定义按键映射与样式、可轻松切换的预设，以及现代化、直观的界面</strong>
   </p>
   
-  [![GitHub release](https://img.shields.io/github/release/lee-sihun/DmNote.svg?logo=github)](https://github.com/lee-sihun/DmNote/releases)
-  [![GitHub downloads](https://img.shields.io/github/downloads/lee-sihun/DmNote/total.svg?logo=github)](https://github.com/lee-sihun/DmNote/releases/download/1.5.0/DM.NOTE.v.1.5.0.zip)
-  [![GitHub license](https://img.shields.io/github/license/lee-sihun/DmNote.svg?logo=github)](https://github.com/lee-sihun/DmNote/blob/master/LICENSE)
+  [![GitHub release](https://img.shields.io/github/release/northernorca/DmNote.svg?logo=github)](https://github.com/northernorca/DmNote/releases)
+  [![GitHub downloads](https://img.shields.io/github/downloads/northernorca/DmNote/total.svg?logo=github)](https://github.com/northernorca/DmNote/releases/tag/v1.5.0%2Blinux.1)
+  [![GitHub license](https://img.shields.io/github/license/northernorca/DmNote.svg?logo=github)](https://github.com/northernorca/DmNote/blob/master/LICENSE)
 </div>
 
 https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
@@ -25,7 +27,7 @@ https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 
 **DM Note** 是一款专为配合 DJMAX RESPECT V 使用而创建的按键显示程序. 基于 Tauri 和 React 构建, 它允许您通过简单设置, 在直播或游戏视频创作时可视化显示按键输入. 目前, 它仅官方支持 Windows 10/11 和 macOS 环境. 如果您使用的是 Linux, 我们推荐尝试 [社区分支版本](https://github.com/northernorca/DmNote).
 
-[前往下载 DM NOTE v1.5.0](https://github.com/lee-sihun/DmNote/releases/download/1.5.0/DM.NOTE.v.1.5.0.zip)
+[前往下载 DM NOTE for Linux](https://github.com/northernorca/DmNote/releases)
 
 ## ✨ 功能特性
 
@@ -75,7 +77,7 @@ https://github.com/user-attachments/assets/20fb118d-3982-4925-9004-9ce0936590c2
 - **前端**: React 19 + Typescript + Vite 7
 - **后端**: Tauri
 - **样式**: Tailwind CSS 3
-- **输入检测**: Raw Input API (Windows), 全局输入事件 (macOS)
+- **输入检测**: Raw Input API (Windows), 全局输入事件 (macOS), evdev (Linux)
 - **包管理器**: npm
 
 ### 文件夹 结构
@@ -107,6 +109,12 @@ git clone https://github.com/lee-sihun/DmNote.git
 cd DmNote
 npm install
 npm run tauri:dev
+```
+
+If you're using NVIDIA GPU, explicit sync should be disabled for the program to not crash on launching:
+
+```bash
+__NV_DISABLE_EXPLICIT_SYNC=1 npm run tauri:dev
 ```
 
 ## 🖼️ 截图
